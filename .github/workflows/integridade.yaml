@@ -1,0 +1,24 @@
+name: Teste de Integridade
+
+on:
+  push:
+    branches:
+    - infraestrutura
+    #   - main  # Defina a branch na qual deseja realizar os testes
+  # pull_request:
+  #   branches:
+  #     - main  # Também pode executar em pull requests para garantir integridade antes de merge
+
+jobs:
+  teste_integridade:
+    runs-on: ubuntu-latest  # Pode ser alterado conforme sua preferência
+
+    steps:
+    - name: Checkout do código
+      uses: actions/checkout@v2
+      
+    - name: Executar scripts de teste
+      run: |
+        for script in ./pyscripts/br/*.py; do
+          python $script
+        done
