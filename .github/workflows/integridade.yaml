@@ -12,10 +12,20 @@ on:
 jobs:
   teste_integridade:
     runs-on: ubuntu-latest  # Pode ser alterado conforme sua preferência
-
     steps:
     - name: Checkout do código
       uses: actions/checkout@v2
+      
+    - name: Configuração do Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'  # Versão do Python a ser usada para os testes
+
+    - name: Instalação das dependências
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt  # Se você tiver um arquivo requirements.txt
+
       
     - name: Executar scripts de teste
       run: |
